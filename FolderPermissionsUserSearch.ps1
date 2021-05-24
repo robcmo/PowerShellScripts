@@ -7,11 +7,11 @@ $User = Read-Host "Username to search for (first.last or flast)"
 
 Out-File -FilePath $OutFile -InputObject "Folder report of $FolderPath that $User has access:`n"
 
-# provided folder user directly added
+# main folder where user directly added
 if ($FolderPath | Get-Acl | Where-Object AccessToString -Like "*$User*" ) {
     $FolderPath | Out-File $OutFile -Append 
 }
-# provided folder user in group
+# main folder where user in group
 $FolderPath | Get-Acl | Select-Object -ExpandProperty access | Select-Object IdentityReference | Where-Object IdentityReference -Like 'NETMPW\*' | `
     ForEach-Object {
     $object = $_.IdentityReference
@@ -26,11 +26,11 @@ $FolderPath | Get-Acl | Select-Object -ExpandProperty access | Select-Object Ide
 # subfolders
 Get-ChildItem $FolderPath -Directory -Recurse  | ForEach-Object {
     $subfolder = $_
-    # subfolder folder user directly added
+    # subfolder where user directly added
     if ($subfolder | Get-Acl | Where-Object AccessToString -Like "*$User*" ) {
         $subfolder | Out-File $OutFile -Append 
     }
-    # provided folder user in group
+    # subfolder where user in group
     $subfolder | Get-Acl | Select-Object -ExpandProperty access | Select-Object IdentityReference | Where-Object IdentityReference -Like 'NETMPW\*' | `
         ForEach-Object {
         $object = $_.IdentityReference
