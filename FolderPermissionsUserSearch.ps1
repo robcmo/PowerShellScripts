@@ -28,7 +28,7 @@ Get-ChildItem $FolderPath -Directory -Recurse  | ForEach-Object {
     $subfolder = $_
     # subfolder where user directly added
     if ($subfolder | Get-Acl | Where-Object AccessToString -Like "*$User*" ) {
-        $subfolder | Out-File $OutFile -Append 
+        $subfolder.FullName | Out-File $OutFile -Append 
     }
     # subfolder where user in group
     $subfolder | Get-Acl | Select-Object -ExpandProperty access | Select-Object IdentityReference | Where-Object IdentityReference -Like 'NETMPW\*' | `
