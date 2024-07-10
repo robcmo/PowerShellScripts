@@ -1,4 +1,4 @@
-# Xbox 360 Marketplace links are broken in-browser.
+# Xbox 360 Marketplace Link Fix by Rob Morrison
 # Run script, enter marketplace link. If prompted to sign in, do so then run script again.
 # https://marketplace.xbox.com/en-US/Product/Halo-Reach/66acd000-77fe-1000-9115-d8024d53085b?DownloadType=GameVideo#LiveZone
 
